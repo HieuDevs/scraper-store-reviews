@@ -27,10 +27,10 @@ def main():
     apple_countries = ["vn"]
     length = len(google_app_name)
     # Scrape
-    # for i in range(length):
-    #     google_play_scraper(
-    #         google_appIds[i], google_app_name[i], google_langs[i], google_countries[i]
-    #     )
+    for i in range(length):
+        google_play_scraper(
+            google_appIds[i], google_app_name[i], google_langs[i], google_countries[i]
+        )
     for i in range(length):
         apple_store_scraper(apple_appIds[i], apple_app_name[i], apple_countries[i])
 
