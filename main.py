@@ -31,6 +31,7 @@ def main():
         google_play_scraper(
             google_appIds[i], google_app_name[i], google_langs[i], google_countries[i]
         )
+
     for i in range(length):
         apple_store_scraper(apple_appIds[i], apple_app_name[i], apple_countries[i])
 
@@ -89,7 +90,9 @@ def apple_store_scraper(app_id, app_name, country):
     app_store = AppStore(country=country, app_name=app_name, app_id=app_id)
     app_store.review()
     a_df = pd.DataFrame(app_store.reviews)
-    a_df.drop(columns=["developerResponse", "isEdited", "date"], inplace=True)
+    if "developerResponse" in a_df.columns:
+        a_df = a_df[a_df["developerResponse"].isnull()]
+    a_df.drop(columns=["isEdited", "date"], inplace=True)
     a_df.rename(
         columns={
             "rating": "score",
